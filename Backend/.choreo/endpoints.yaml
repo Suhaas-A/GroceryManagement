@@ -1,8 +1,71 @@
-version: 0.1
-
 endpoints:
-  - name: "REST API"
-    port: 5000
-    type: REST
-    networkVisibility: Public
-    context: /
+  - name: send_items
+    description: Retrieve items from the database
+    method: GET
+    path: /api/items
+    request: None
+    response:
+      content_type: application/json
+      schema: items_response_schema.json
+
+  - name: add_item
+    description: Add a new item to the database
+    method: POST
+    path: /api/new_item
+    request:
+      content_type: application/json
+      schema: add_item_request_schema.json
+    response:
+      content_type: text/plain
+      description: Indicates success or failure
+
+  - name: delete_item
+    description: Delete an item from the database
+    method: POST
+    path: /api/delete_item
+    request:
+      content_type: application/json
+      schema: delete_item_request_schema.json
+    response:
+      content_type: text/plain
+      description: Indicates success or failure
+
+  - name: edit_item
+    description: Edit an existing item in the database
+    method: POST
+    path: /api/edit_item
+    request:
+      content_type: application/json
+      schema: edit_item_request_schema.json
+    response:
+      content_type: text/plain
+      description: Indicates success or failure
+
+  - name: save_bill
+    description: Save a bill with items to the database
+    method: POST
+    path: /api/save_bill
+    request:
+      content_type: application/json
+      schema: save_bill_request_schema.json
+    response:
+      content_type: text/plain
+      description: Indicates success or failure
+
+  - name: recent_bills
+    description: Retrieve recent bills from the database
+    method: GET
+    path: /api/recent_bills
+    request: None
+    response:
+      content_type: application/json
+      schema: recent_bills_response_schema.json
+
+  - name: catch_all
+    description: Catch-all route for serving the frontend
+    method: GET
+    path: /<path:path>
+    request: None
+    response:
+      content_type: text/html
+      description: HTML content
