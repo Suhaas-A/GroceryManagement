@@ -136,13 +136,8 @@ def recent_bills():
     return jsonify(each_items_list)
 
 
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
-def catch_all(path):
-    if path == '':
-        return redirect(url_for('catch_all', path='Billing'))
-    return render_template("index.html")
-
+with app.app_context():
+    db.create_all()
 
 if __name__ == '__main__':
     with app.app_context():
